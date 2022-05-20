@@ -1,19 +1,30 @@
 from tkinter import *
-from tkinter.ttk import *
+from time import *
 
-from time import strftime
+def update():
+    time_string = strftime("Time: %H:%M:%S %p")
+    time_label.config(text=time_string)
+
+    day_string = strftime("Day: %A")
+    day_label.config(text=day_string)
+
+    date_string = strftime("Date: %B %d, %Y")
+    date_label.config(text=date_string)
+
+    root.after(1000,update)
+
 
 root = Tk()
-root.title('Clock')
 
-def time(): 
-  string = strftime('%H:%M:%S  %p')
-  label.config(text=string)
-  label.after(1000, time)
+time_label = Label(root,font=("Arial",50),fg="#00FFFF",bg="black")
+time_label.pack()
 
-label = Label(root, font=('Comfortaa', 50), background='black', foreground='cyan')
-label.pack(anchor='center')
+day_label = Label(root,font=("Comfortaa",50),fg="#00FFFF",bg="black", anchor='w')
+day_label.pack()
 
-time()
+date_label = Label(root,font=("Comfortaa",50),fg="#00FFFF",bg="black")
+date_label.pack()
 
-mainloop()
+update()
+
+root.mainloop()
